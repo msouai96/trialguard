@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#173d32">
+<title>TrialGuard — Your money. Your control.</title>
+<style>
+:root{--green:#173d32;--green2:#245c49;--bg:#f4f7f5;--card:#fff;--ink:#17231e;--muted:#68766f;--line:#e3eae5;--red:#b43b3b;--amber:#9a6812}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:var(--green);color:#fff;padding:22px 18px 28px;border-radius:0 0 24px 24px}
+.brand{display:flex;align-items:center;gap:11px}.logo{width:44px;height:44px;border-radius:14px;background:#ffffff20;display:grid;place-items:center;font-size:24px}
+.brand strong{font-size:20px;letter-spacing:.2px}.tag{font-size:12px;color:#d4e5dc;margin-top:2px}
+main{max-width:680px;margin:auto;padding:18px 15px 40px}.welcome{margin:0 0 5px;font-size:22px}.sub{color:var(--muted);margin:0 0 17px;font-size:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.focus{background:#e8f2ec;border:1px solid #d5e5da;border-radius:17px;padding:15px;margin-bottom:18px}.focus strong{display:block;font-size:15px;color:var(--green);margin-bottom:5px}.focus p{margin:0;color:#456255;font-size:13px;line-height:1.45}.focus .urgent{font-weight:750;color:#9a6812}.stat.trials{border-color:#cfe1d5}.stat.trials b{color:var(--green2)}.stat,.panel,.item{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:15px}
+.stat span{display:block;color:var(--muted);font-size:12px}.stat b{font-size:25px;display:block;margin-top:5px}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;margin:19px 0 10px}.sectionhead h2{font-size:17px;margin:0}
+button{border:0;border-radius:12px;padding:12px 15px;background:var(--green);color:#fff;font-weight:650;font-size:14px;cursor:pointer}
+button.secondary{background:#edf3ef;color:var(--green)}button.danger{background:#fff0f0;color:var(--red)}button.small{padding:8px 10px;font-size:12px}
+.item{margin-bottom:10px}.itemtop{display:flex;justify-content:space-between;gap:12px}.itemname{font-weight:700}.price{font-weight:750;font-size:18px;white-space:nowrap}.meta{color:var(--muted);font-size:12px;margin-top:5px}.pill{font-size:11px;padding:5px 8px;border-radius:20px;background:#fff4dd;color:var(--amber);white-space:nowrap;height:max-content}.pill.paid{background:#edf3ef;color:var(--green2)}
+.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.empty{text-align:center;color:var(--muted);padding:24px 12px}
+.panel{margin-top:16px}.panel h2{font-size:17px;margin:0 0 12px}
+form{display:grid;gap:12px}label{display:block;font-size:12px;font-weight:650;color:#43534a;margin-bottom:5px}
+input,select{width:100%;padding:12px;border:1px solid #d8e2db;border-radius:11px;background:#fff;font:inherit;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.radioRow{display:flex;gap:9px}.radioRow label{flex:1;border:1px solid var(--line);border-radius:11px;padding:11px;margin:0;font-size:13px}.radioRow input{width:auto;margin-right:5px}
+.checks{display:flex;gap:14px;flex-wrap:wrap}.checks label{font-weight:500;font-size:13px}
+.hint{font-size:11px;color:var(--muted);line-height:1.5}.notice{background:#edf3ef;border-radius:12px;padding:12px;font-size:12px;color:#395448;line-height:1.5;margin-top:13px}
+.hidden{display:none!important}.footer{text-align:center;color:var(--muted);font-size:11px;margin:20px 8px}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">🛡️</div><div><strong>TrialGuard</strong><div class="tag">Your money. Your control.</div></div></div>
+</header>
+<main>
+  <h1 class="welcome">Stay in control of your subscriptions.</h1>
+  <p class="sub">Know what you are subscribed to, when each free trial ends, and when you could be charged.</p>
+  <div class="focus" id="trialFocus"><strong>Your free-trial watch</strong><p>As you add trials, TrialGuard will show which one ends next and the expected charge.</p></div>
+  <div class="stats">
+    <div class="stat trials"><span>Active free trials</span><b id="trialCount">0</b></div>
+    <div class="stat"><span>Upcoming charges (30 days)</span><b id="upcoming">0</b></div>
+  </div>
+  <div class="sectionhead"><h2>Trials & subscriptions</h2><button onclick="showForm()">＋ Add new</button></div>
+  <div id="list"></div>
+
+  <section class="panel" id="gmailPanel">
+    <h2>Connect Gmail</h2>
+    <p style="color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 12px">Coming next: securely look for free-trial confirmations, subscription receipts and renewal notices—with your permission.</p>
+    <button type="button" class="secondary" onclick="showGmailInfo()">How Gmail connection will work</button>
+    <div id="gmailInfo" class="notice hidden" role="status">
+      <b>Not connected yet.</b> This button does not access your Gmail. A real connection still needs secure Google sign-in, Google's permission approval and a protected online service. When ready, access will be read-only, and you will review detected subscriptions before adding them to TrialGuard.
+    </div>
+  </section>
+
+  <div class="actions" style="margin-top:10px;margin-bottom:8px">
+    <button type="button" class="secondary small" onclick="exportBackup()">Download backup</button>
+    <button type="button" class="secondary small" onclick="$('backupFile').click()">Restore backup</button>
+    <input id="backupFile" class="hidden" type="file" accept=".json,application/json" onchange="importBackup(event)">
+  </div>
+  <p class="hint">Keep a backup of your subscriptions in a file. Restoring a backup replaces the list currently saved in this browser.</p>
+
+  <section class="panel hidden" id="formPanel">
+    <h2 id="formTitle">Add a subscription</h2>
+    <form id="subForm">
+      <div><label for="service">Service name</label><input id="service" required maxlength="50" placeholder="e.g. Netflix, photo editor"></div>
+      <div class="grid2">
+        <div><label for="amount">Expected payment</label><input id="amount" type="number" min="0.01" step="0.01" required placeholder="9.99"></div>
+        <div><label for="currency">Currency</label><select id="currency"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="GBP">GBP £</option></select></div>
+      </div>
+      <div><label>Subscription type</label><div class="radioRow">
+        <label><input type="radio" name="kind" value="trial" checked> Free trial</label>
+        <label><input type="radio" name="kind" value="paid"> Paid</label>
+      </div></div>
+      <div class="grid2">
+        <div><label for="nextDate">Trial end / next charge date</label><input id="nextDate" type="date" required></div>
+        <div><label for="frequency">Repeats</label><select id="frequency"><option value="weekly">Weekly</option><option value="monthly" selected>Monthly</option><option value="quarterly">Every 3 months</option><option value="yearly">Yearly</option><option value="once">One-time / ends after trial</option></select></div>
+      </div>
+      <div><label>Remind me</label><div class="checks">
+        <label><input type="checkbox" name="reminder" value="7" checked> 7 days before</label>
+        <label><input type="checkbox" name="reminder" value="2" checked> 2 days before</label>
+        <label><input type="checkbox" name="reminder" value="0" checked> On the day</label>
+      </div></div>
+      <div class="actions"><button type="submit">Save subscription</button><button type="button" class="secondary" onclick="hideForm()">Cancel</button></div>
+      <div class="hint">Add a trial as soon as you sign up. This prototype stores entries only in this browser on this device. Reminder choices are saved, but automatic device notifications and account scanning are not connected yet.</div>
+    </form>
+  </section>
+
+  <div class="notice"><b>Important:</b> TrialGuard reminders can help you remember, but they cannot guarantee that a company will not charge you. Always complete cancellation with the service provider and check for confirmation.</div>
+  <div class="footer">Early prototype · Manual entry only for now · Automatic email/account discovery is a future stage</div>
+</main>
+<script>
+const KEY='trialguard_prototype_v1';
+let entries=JSON.parse(localStorage.getItem(KEY)||'[]');
+let editing=null;
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem(KEY,JSON.stringify(entries));render()}
+function fmtDate(s){if(!s)return '';return new Date(s+'T12:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})}
+function money(n,c){return new Intl.NumberFormat(undefined,{style:'currency',currency:c}).format(Number(n))}
+function daysUntil(s){const a=new Date();a.setHours(0,0,0,0);const b=new Date(s+'T00:00:00');return Math.round((b-a)/86400000)}
+function render(){
+ const activeTrials=entries.filter(x=>x.kind==='trial'&&!x.cancelled);
+ $('trialCount').textContent=activeTrials.length;
+ $('upcoming').textContent=entries.filter(x=>!x.cancelled && daysUntil(x.date)>=0 && daysUntil(x.date)<=30).length;
+ const nextTrial=activeTrials.filter(x=>daysUntil(x.date)>=0).sort((a,b)=>daysUntil(a.date)-daysUntil(b.date))[0];
+ const focus=$('trialFocus');
+ if(nextTrial){const d=daysUntil(nextTrial.date);const timing=d===0?'ends today':d===1?'ends tomorrow':`ends in ${d} days`;focus.innerHTML=`<strong>Next free trial ending</strong><p><b>${esc(nextTrial.name)}</b> ${timing} · ${fmtDate(nextTrial.date)}. Expected charge: <span class="urgent">${money(nextTrial.amount,nextTrial.currency)}</span>. Check the provider's cancellation terms before the deadline.</p>`}
+ else if(activeTrials.length){focus.innerHTML='<strong>Your free-trial watch</strong><p>Your active trials have dates in the past. Check each provider to confirm whether it converted to a paid plan or was cancelled.</p>'}
+ else{focus.innerHTML='<strong>Your free-trial watch</strong><p>No active free trials recorded yet. Add each free trial as soon as you sign up so you can see its end date and expected charge.</p>'}
+ const list=$('list');
+ if(!entries.length){list.innerHTML='<div class="item empty">No subscriptions yet.<br>Add a free trial or subscription to get started.</div>';return}
+ list.innerHTML=[...entries].sort((a,b)=>{if(a.cancelled!==b.cancelled)return a.cancelled?1:-1;if(a.kind!==b.kind)return a.kind==='trial'?-1:1;return daysUntil(a.date)-daysUntil(b.date)}).map(x=>{
+  const d=daysUntil(x.date),when=d<0?'Date passed':d===0?'Due today':d+' days left';
+  return `<article class="item"><div class="itemtop"><div><div class="itemname">${esc(x.name)}</div><div class="meta">${x.kind==='trial'?'Free trial ends · expected first charge':'Next payment'} · ${fmtDate(x.date)}</div></div><div style="text-align:right"><div class="price">${money(x.amount,x.currency)}</div><span class="pill ${x.kind==='paid'?'paid':''}">${x.cancelled?'Marked cancelled':x.kind==='trial'?'FREE TRIAL':'PAID'} · ${when}</span></div></div><div class="meta">Repeats: ${x.frequency==='once'?'One-time':x.frequency}</div><div class="actions"><button class="secondary small" onclick="editEntry('${x.id}')">Edit</button><button class="secondary small" onclick="cancelEntry('${x.id}')">${x.cancelled?'Undo cancelled':'Mark cancelled'}</button><button class="danger small" onclick="deleteEntry('${x.id}')">Delete</button></div></article>`;
+ }).join('');
+}
+
+function exportBackup(){
+ const payload={app:'TrialGuard',version:1,exportedAt:new Date().toISOString(),entries};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;
+ a.download='trialguard-backup-'+new Date().toISOString().slice(0,10)+'.json';
+ document.body.appendChild(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function importBackup(event){
+ const file=event.target.files&&event.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{
+  try{
+   const data=JSON.parse(String(reader.result||''));
+   const imported=Array.isArray(data)?data:data.entries;
+   if(!Array.isArray(imported))throw new Error('This file does not contain a TrialGuard backup.');
+   const valid=imported.every(x=>x&&typeof x==='object'&&
+    typeof x.id==='string'&&typeof x.name==='string'&&
+    Number.isFinite(Number(x.amount))&&
+    ['EUR','USD','GBP'].includes(x.currency)&&
+    ['trial','paid'].includes(x.kind)&&
+    typeof x.date==='string'&&
+    ['weekly','monthly','quarterly','yearly','once'].includes(x.frequency));
+   if(!valid)throw new Error('The backup file contains entries in an unrecognised format.');
+   if(!confirm('Restore '+imported.length+' subscription(s)? This will replace the subscriptions currently saved in this browser.'))return;
+   entries=imported.map(x=>({
+    id:x.id,name:x.name,amount:Number(x.amount),currency:x.currency,kind:x.kind,
+    date:x.date,frequency:x.frequency,
+    reminders:Array.isArray(x.reminders)?x.reminders.map(Number).filter(n=>[0,2,7].includes(n)):[],
+    cancelled:Boolean(x.cancelled)
+   }));
+   save();hideForm();
+   alert('Your TrialGuard backup has been restored.');
+  }catch(err){alert(err.message||'Could not read this backup file.')}
+  finally{$('backupFile').value=''}
+ };
+ reader.onerror=()=>{alert('Could not read this file.');$('backupFile').value=''};
+ reader.readAsText(file);
+}
+
+function showGmailInfo(){
+ const info=$('gmailInfo');
+ info.classList.toggle('hidden');
+}
+
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function showForm(){editing=null;$('formTitle').textContent='Add a subscription';$('subForm').reset();$('currency').value='EUR';$('nextDate').value=new Date(Date.now()+7*86400000).toISOString().slice(0,10);$('formPanel').classList.remove('hidden');$('service').focus()}
+function hideForm(){$('formPanel').classList.add('hidden')}
+function editEntry(id){const x=entries.find(e=>e.id===id);if(!x)return;showForm();editing=id;$('formTitle').textContent='Edit subscription';$('service').value=x.name;$('amount').value=x.amount;$('currency').value=x.currency;$('nextDate').value=x.date;$('frequency').value=x.frequency;document.querySelector(`input[name="kind"][value="${x.kind}"]`).checked=true;document.querySelectorAll('input[name="reminder"]').forEach(c=>c.checked=x.reminders.includes(Number(c.value)));$('formPanel').scrollIntoView({behavior:'smooth'})}
+function cancelEntry(id){const x=entries.find(e=>e.id===id);if(x){x.cancelled=!x.cancelled;save()}}
+function deleteEntry(id){if(confirm('Delete this subscription from this prototype?')){entries=entries.filter(e=>e.id!==id);save()}}
+$('subForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ const item={id:editing||String(Date.now()),name:$('service').value.trim(),amount:Number($('amount').value),currency:$('currency').value,kind:document.querySelector('input[name="kind"]:checked').value,date:$('nextDate').value,frequency:$('frequency').value,reminders:[...document.querySelectorAll('input[name="reminder"]:checked')].map(c=>Number(c.value)),cancelled:false};
+ if(editing){const old=entries.findIndex(x=>x.id===editing);if(old>=0){item.cancelled=entries[old].cancelled;entries[old]=item}else{entries.push(item)}}else entries.push(item);
+ save();hideForm();
+});
+render();
+</script>
+</body>
+</html>

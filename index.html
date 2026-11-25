@@ -1,1 +1,110 @@
-https://github.com/msouai96/trialguard/blob/main/trialguard_v1_2.html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#173d32">
+<title>TrialGuard — Your money. Your control.</title>
+<style>
+:root{--green:#173d32;--green2:#245c49;--mint:#e8f2ec;--bg:#f4f7f5;--ink:#17231e;--muted:#68766f;--line:#e2e9e4;--white:#fff;--amber:#fff3d9;--red:#fff0ed;--shadow:0 10px 28px rgba(23,61,50,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:1060px;margin:auto;padding:22px 18px 48px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:13px;background:var(--green);color:white;display:grid;place-items:center;font-size:22px;font-weight:800}.brand strong{display:block;font-size:19px;letter-spacing:-.4px}.brand small{color:var(--muted)}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:11px;padding:10px 14px;font-weight:650;background:var(--green);color:white}.btn.secondary{background:white;color:var(--green);border:1px solid var(--line)}.btn.light{background:var(--mint);color:var(--green)}.btn.danger{background:var(--red);color:#a43a2a}.hero{background:linear-gradient(120deg,#173d32,#2c6a50);color:white;padding:26px;border-radius:20px;box-shadow:var(--shadow);margin-bottom:20px}.hero h1{font-size:clamp(25px,4vw,34px);line-height:1.12;margin:0 0 8px;letter-spacing:-.8px}.hero p{margin:0;color:#e0eee6;max-width:600px}.hero-note{font-size:12px;color:#d0e3d7;margin-top:16px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 22px}.stat,.panel{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.stat span{display:block;color:var(--muted);font-size:13px}.stat strong{display:block;font-size:26px;margin-top:3px;letter-spacing:-.5px;overflow-wrap:anywhere}#monthlyTotal{font-size:18px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0 12px}.section-head h2{font-size:18px;margin:0}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select,.field input,.field select{border:1px solid var(--line);border-radius:10px;padding:10px 11px;background:white;color:var(--ink);min-width:0}.toolbar input{flex:1;min-width:160px}.list{display:grid;gap:10px}.item{background:white;border:1px solid var(--line);border-radius:15px;padding:15px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}.item h3{font-size:16px;margin:0 0 3px}.meta{color:var(--muted);font-size:13px}.item-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pill{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:700;background:var(--mint);color:var(--green);margin-left:6px}.pill.soon{background:var(--amber);color:#825b13}.pill.cancelled{background:#edf0ee;color:#66716b}.empty{padding:28px;text-align:center;color:var(--muted);background:white;border:1px dashed #cbd8cf;border-radius:15px}.empty strong{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}.panel{margin-top:18px}.panel h2{font-size:18px;margin:0 0 6px}.panel p{color:var(--muted);margin:0 0 12px;font-size:13px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:12px;color:var(--muted);font-weight:650}.field input,.field select{width:100%}.field.full{grid-column:1/-1}.form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.notice{background:#f0f5f1;border:1px solid #dce8df;border-radius:12px;padding:12px;color:#3f5749;font-size:13px;margin-top:12px}.notice strong{color:var(--green)}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:26px}.hidden{display:none!important}.modal-backdrop{position:fixed;inset:0;background:#10251dcc;display:grid;place-items:center;padding:16px;z-index:5}.modal{background:white;border-radius:18px;padding:20px;width:min(100%,480px);max-height:90vh;overflow:auto}.modal h2{margin:0 0 15px}.modal .close{float:right}.small{font-size:12px;color:var(--muted)}@media(max-width:650px){.wrap{padding:16px 13px 36px}.top{align-items:flex-start}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:21px}.item{grid-template-columns:1fr}.item-actions{justify-content:flex-start}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{padding:22px}.top-actions .btn{padding:9px 11px;font-size:13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="logo">✓</div><div><strong>TrialGuard</strong><small>Your money. Your control.</small></div></div>
+ <div class="top-actions"><button class="btn secondary" id="exportBtn">Backup</button><button class="btn secondary" id="importBtn">Restore</button><input id="fileInput" type="file" accept="application/json" class="hidden"></div>
+</header>
+<section class="hero">
+ <h1>Stay ahead of every subscription.</h1>
+ <p>Keep track of free trials, renewal dates and expected charges — all in one clear place.</p>
+ <div class="hero-note">Your entries are stored in this browser on this device. Keep a backup if you change phones or browsers.</div>
+</section>
+<section class="stats">
+ <div class="stat"><span>Current free trials</span><strong id="trialCount">0</strong></div>
+ <div class="stat"><span>Upcoming dates · 30 days</span><strong id="upcomingCount">0</strong></div>
+ <div class="stat"><span>Monthly estimate · separate currencies</span><strong id="monthlyTotal">€0.00</strong></div>
+</section>
+<div class="section-head"><h2>Your subscriptions</h2><button class="btn" id="addBtn">＋ Add subscription</button></div>
+<div class="toolbar">
+ <input id="search" type="search" placeholder="Search services…">
+ <select id="filter"><option value="all">All entries</option><option value="trial">Free trials</option><option value="paid">Paid subscriptions</option><option value="cancelled">Cancelled</option></select>
+ <select id="sort"><option value="date">Soonest first</option><option value="name">Name A–Z</option></select>
+</div>
+<div id="entries" class="list"></div>
+<section class="panel">
+ <h2>Gmail connection</h2>
+ <p>Automatic email scanning is planned for a future version. This version does not connect to Gmail or read your inbox.</p>
+ <div class="notice"><strong>Privacy first:</strong> no email access, bank access, online account or payment details are requested by this prototype.</div>
+</section>
+<section class="panel">
+ <h2>About reminders and Premium</h2>
+ <p>This version calculates dates and displays upcoming dates when you open it. It does not send push notifications, emails or automatic reminders. Premium checkout and payment processing are not connected yet.</p>
+ <div class="notice">TrialGuard's planned model: a free manual tracker and Premium planned at €5.99/month, with authorised Gmail scanning and advance reminders when those features are built and tested. Premium access is not activated by this prototype yet.</div>
+</section>
+<div class="footer">TrialGuard prototype · Your data stays in this browser · v1.2</div>
+</div>
+<div id="modalRoot" class="hidden"></div>
+<script>
+(()=>{
+const KEY='trialguard_prototype_v2';
+let entries=[];
+const $=id=>document.getElementById(id);
+const today=new Date();today.setHours(0,0,0,0);
+const currencies=['EUR','USD','GBP'];
+const frequencies=['weekly','monthly','quarterly','yearly'];
+const validDate=s=>{if(typeof s!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const d=new Date(s+'T12:00:00');return Number.isFinite(d.getTime())&&d.toISOString().slice(0,10)===s};
+const money=(n,c='EUR')=>new Intl.NumberFormat(undefined,{style:'currency',currency:currencies.includes(c)?c:'EUR'}).format(Number(n)||0);
+const dateText=s=>validDate(s)?new Date(s+'T12:00:00').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}):'Invalid date';
+const daysUntil=s=>validDate(s)?Math.round((new Date(s+'T12:00:00')-today)/86400000):NaN;
+function normalizeEntry(x){if(!x||typeof x!=='object'||typeof x.id!=='string'||typeof x.name!=='string'||!x.name.trim()||x.name.length>70||!validDate(x.date)||!['trial','paid'].includes(x.type))return null;const amount=Number(x.amount);if(!Number.isFinite(amount)||amount<0||amount>100000000||!currencies.includes(x.currency)||!frequencies.includes(x.frequency))return null;if(x.note!==undefined&&(typeof x.note!=='string'||x.note.length>100))return null;if(x.cancelled!==undefined&&typeof x.cancelled!=='boolean')return null;return {id:x.id,name:x.name.trim(),date:x.date,type:x.type,amount:x.type==='trial'?0:amount,currency:x.currency,frequency:x.frequency,note:x.note||'',cancelled:x.cancelled===true}}
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');entries=Array.isArray(v)?v.map(normalizeEntry).filter(Boolean):[]}catch{entries=[]}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(entries));render();return true}catch(err){alert('TrialGuard could not save this change on this device. Please check available browser storage and keep a backup.');console.error(err);return false}}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+ const q=$('search').value.toLowerCase(),f=$('filter').value,sort=$('sort').value;
+ let visible=entries.filter(e=>(e.name+' '+(e.note||'')).toLowerCase().includes(q));
+ if(f==='trial')visible=visible.filter(e=>e.type==='trial'&&!e.cancelled);
+ if(f==='paid')visible=visible.filter(e=>e.type==='paid'&&!e.cancelled);
+ if(f==='cancelled')visible=visible.filter(e=>e.cancelled);
+ visible.sort((a,b)=>sort==='name'?a.name.localeCompare(b.name):a.date.localeCompare(b.date));
+ $('trialCount').textContent=entries.filter(e=>e.type==='trial'&&!e.cancelled&&daysUntil(e.date)>=0).length;
+ $('upcomingCount').textContent=entries.filter(e=>!e.cancelled&&daysUntil(e.date)>=0&&daysUntil(e.date)<=30).length;
+ const monthlyByCurrency={};
+ entries.filter(e=>!e.cancelled&&e.type==='paid').forEach(e=>{const c=e.currency||'EUR',n=Number(e.amount)||0;const monthly=n*(e.frequency==='yearly'?1/12:e.frequency==='weekly'?52/12:e.frequency==='quarterly'?1/3:1);monthlyByCurrency[c]=(monthlyByCurrency[c]||0)+monthly});
+ const totals=Object.keys(monthlyByCurrency).sort().map(c=>money(monthlyByCurrency[c],c));
+ $('monthlyTotal').textContent=totals.length?totals.join(' · '):money(0,'EUR');
+ if(!visible.length){$('entries').innerHTML='<div class="empty"><strong>No subscriptions to show</strong>Add a free trial or subscription to start tracking its next charge date.</div>';return}
+ $('entries').innerHTML=visible.map(e=>{
+ const d=daysUntil(e.date),state=e.cancelled?'<span class="pill cancelled">Cancelled</span>':d<0?'<span class="pill">'+(e.type==='trial'?'Trial ended':'Payment date passed')+'</span>':d<=7?'<span class="pill soon">Due in '+d+' day'+(d===1?'':'s')+'</span>':'<span class="pill">'+(e.type==='trial'?'Free trial':'Subscription')+'</span>';
+ return `<article class="item"><div><h3>${escapeHtml(e.name)} ${state}</h3><div class="meta">${e.type==='trial'?'Trial ends':'Next charge'}: <strong>${dateText(e.date)}</strong>${e.type==='paid'?' · '+money(e.amount,e.currency)+' / '+e.frequency:''}${e.note?' · '+escapeHtml(e.note):''}</div></div><div class="item-actions"><button class="btn light" data-edit="${escapeHtml(e.id)}">Edit</button>${e.cancelled?`<button class="btn secondary" data-undo="${escapeHtml(e.id)}">Reactivate</button>`:`<button class="btn secondary" data-cancel="${escapeHtml(e.id)}">Cancel</button>`}<button class="btn danger" data-delete="${escapeHtml(e.id)}">Delete</button></div></article>`;
+ }).join('');
+}
+function openForm(item){
+ const e=item||{type:'trial',name:'',amount:'',currency:'EUR',date:'',frequency:'monthly',note:''};
+ $('modalRoot').classList.remove('hidden');
+ $('modalRoot').innerHTML=`<div class="modal-backdrop"><div class="modal"><button class="btn secondary close" id="closeModal">Close</button><h2>${item?'Edit':'Add'} subscription</h2><form id="entryForm"><div class="formgrid">
+ <div class="field full"><label>Service or company</label><input name="name" required maxlength="70" placeholder="e.g. Music, video or cloud service" value="${escapeHtml(e.name)}"></div>
+ <div class="field"><label>Type</label><select name="type"><option value="trial" ${e.type==='trial'?'selected':''}>Free trial</option><option value="paid" ${e.type==='paid'?'selected':''}>Paid subscription</option></select></div>
+ <div class="field"><label>${e.type==='paid'?'Next payment date':'Trial end date'}</label><input name="date" type="date" required value="${escapeHtml(e.date)}"></div>
+ <div class="field"><label>Amount (for paid subscriptions)</label><input name="amount" type="number" min="0" step="0.01" placeholder="0.00" value="${escapeHtml(e.amount)}"></div>
+ <div class="field"><label>Currency</label><select name="currency">${['EUR','USD','GBP'].map(c=>`<option ${e.currency===c?'selected':''}>${c}</option>`).join('')}</select></div>
+ <div class="field"><label>Billing frequency</label><select name="frequency">${[['weekly','Weekly'],['monthly','Monthly'],['quarterly','Every 3 months'],['yearly','Yearly']].map(([v,t])=>`<option value="${v}" ${e.frequency===v?'selected':''}>${t}</option>`).join('')}</select></div>
+ <div class="field"><label>Note (optional)</label><input name="note" maxlength="100" placeholder="Anything useful" value="${escapeHtml(e.note||'')}"></div>
+ </div><div class="form-actions"><button class="btn" type="submit">Save subscription</button><button class="btn secondary" type="button" id="cancelForm">Cancel</button></div><p class="small">Enter the date when the trial ends or the next payment is expected. TrialGuard does not cancel subscriptions for you.</p></form></div></div>`;
+ $('closeModal').onclick=closeForm;$('cancelForm').onclick=closeForm;
+ $('entryForm').elements.type.onchange=()=>{$('entryForm').querySelector('input[name=date]').previousElementSibling.textContent=$('entryForm').elements.type.value==='paid'?'Next payment date':'Trial end date'};
+ $('entryForm').onsubmit=ev=>{ev.preventDefault();const fd=new FormData(ev.target),data=Object.fromEntries(fd.entries());data.name=String(data.name||'').trim();data.amount=data.type==='trial'?'0':String(data.amount||'0');if(!data.name||!validDate(data.date)||!['trial','paid'].includes(data.type)||!currencies.includes(data.currency)||!frequencies.includes(data.frequency)||!Number.isFinite(Number(data.amount))||Number(data.amount)<0||Number(data.amount)>100000000){alert('Please check the name, date, amount, currency and billing frequency.');return}if(data.type==='trial')data.amount='0';if(item){Object.assign(item,data)}else entries.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),...data,cancelled:false});closeForm();save()};
+}
+function closeForm(){$('modalRoot').classList.add('hidden');$('modalRoot').innerHTML=''}
+$('addBtn').onclick=()=>openForm();$('search').oninput=render;$('filter').onchange=render;$('sort').onchange=render;
+$('entries').onclick=ev=>{const b=ev.target.closest('button');if(!b)return;const id=b.dataset.edit||b.dataset.cancel||b.dataset.undo||b.dataset.delete;const e=entries.find(x=>x.id===id);if(!e)return;if(b.dataset.edit)openForm(e);if(b.dataset.cancel){if(confirm('Mark this subscription as cancelled?')){e.cancelled=true;save()}}if(b.dataset.undo){e.cancelled=false;save()}if(b.dataset.delete){if(confirm('Delete this entry from this device?')){entries=entries.filter(x=>x.id!==id);save()}}};
+$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(entries,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='trialguard-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('importBtn').onclick=()=>$('fileInput').click();
+$('fileInput').onchange=async ev=>{const file=ev.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!Array.isArray(data)||data.length>500||!data.every(x=>normalizeEntry(x)))throw Error();const clean=data.map(normalizeEntry);if(confirm('Restore this backup? It will replace the entries currently saved in this browser.')){const previous=entries;entries=clean;if(save())alert('Backup restored.');else entries=previous}}catch{alert('This file is not a valid TrialGuard backup.')}ev.target.value=''}
+load();render();
+})();
+</script>
+</body>
+</html>

@@ -48,11 +48,16 @@ function panel(){
   p.innerHTML='<h2>Free plan</h2><p>You are using <strong>'+Math.min(n,999)+' of '+FREE_LIMIT+'</strong> free entries. Unlock unlimited entries for a one-time '+PRICE+'.</p><div class="form-actions"><a class="btn" href="'+LINK+'" style="text-decoration:none">Unlock for '+PRICE+'</a></div>';
  }
 }
+function fixCopy(){
+ document.querySelectorAll('.panel').forEach(p=>{const h=p.querySelector('h2');if(h&&h.textContent.trim()==='What reminders can do today'){const t=p.querySelector('p');if(t&&!t.dataset.fixed){t.textContent='TrialGuard shows countdowns and checks 7-day, 3-day, 1-day and end-date reminders when you open it. With phone alerts turned on (free ntfy app), it queues notifications up to 3 days ahead, so open TrialGuard at least every 3 days. Gmail discovery and cloud sync are not connected.';t.dataset.fixed='1'}}});
+ const n=document.querySelector('#reminders .notice');
+ if(n&&!n.dataset.fixed){n.textContent='TrialGuard checks reminders whenever you open the app. Turn on phone alerts at the bottom of the page to be notified when it is closed.';n.dataset.fixed='1'}
+}
 function init(){
- panel();
+ panel();fixCopy();
  if(justPaid){justPaid=false;const a=showModal('Payment received ✓','<p>Thank you! TrialGuard is now unlocked on this device with unlimited entries.</p>');const ok=document.createElement('button');ok.className='btn';ok.textContent='Great';ok.onclick=closeModal;a.append(ok)}
 }
 window.addEventListener('load',init);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)panel()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){panel();fixCopy()}});
 setInterval(()=>{if(!document.hidden)panel()},5000);
 })();
